@@ -27,15 +27,17 @@ export class Triangle implements Figure {
     const [side1, side2, maxSide] = [a, b, c].sort((len1, len2) => len1 - len2);
 
     if (maxSide >= side1 + side2) {
-      throw new Error('Longest side should be higher then sum of 2 others');
+      throw new Error('Longest side should be less then sum of 2 others');
     }
   }
 
   getArea(): number {
     const p = this.lengthSum / 2;
 
-    return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(
-      2,
+    return (
+      Math.floor(
+        Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
+      ) / 100
     );
   }
 }
@@ -71,7 +73,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+    return Math.floor(this.width * this.height);
   }
 }
 
